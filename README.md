@@ -1,1 +1,1 @@
-Некоторые реализации в ООП стиле
+Some OOP-style implementations
