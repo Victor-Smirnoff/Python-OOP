@@ -24,35 +24,32 @@ class ObjList:
 
 
 class LinkedList:
-    def __init__(self, head=None, tail=None):
-        self.lst = []
-        self.head = head
-        self.tail = tail
+    def __init__(self):
+        self.head = None
+        self.tail = None
 
     def add_obj(self, obj):
-        if not self.lst:
-            self.lst.append(obj)
-            obj.set_prev(None)
-            obj.set_next(None)
-            self.head = self.lst[0]
-        elif self.lst:
-            self.lst.append(obj)
-            obj.set_prev(self.lst[-2])
-            obj.set_next(None)
-            self.lst[-2].set_next(obj)
-            self.tail = self.lst[-1]
+        if self.tail:
+            self.tail.set_next(obj)
+        obj.set_prev(self.tail)
+        self.tail = obj
+        if not self.head:
+            self.head = obj
 
     def remove_obj(self):
-        if self.lst:
-            self.lst.pop()
-            if len(self.lst) >= 1:
-                self.head = self.lst[0]
-                self.lst[-1].set_next(None)
-            else:
-                self.head = None
-            if len(self.lst) >= 2:
-                self.head = self.lst[0]
-                self.tail = self.lst[-1]
+        if self.tail is None:
+            return
+        prev = self.tail.get_prev()
+        if prev:
+            prev.set_next(None)
+        self.tail = prev
+        if self.tail is None:
+            self.head = None
 
     def get_data(self):
-        return [obj.get_data() for obj in self.lst]
+        lst = []
+        h = self.head
+        while h:
+            lst.append(h.get_data())
+            h = h.get_next()
+        return lst
