@@ -1,7 +1,6 @@
 class WordString:
     def __init__(self, value=''):
         self.__string = value
-        self.lst = []
 
     @property
     def string(self):
