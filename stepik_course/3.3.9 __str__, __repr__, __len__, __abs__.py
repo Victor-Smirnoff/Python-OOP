@@ -1,8 +1,11 @@
 class Ingredient:
     def __init__(self, name, volume, measure):
-        self.name = name
-        self.volume = volume
-        self.measure = measure
+        if type(name) == str:
+            self.name = name
+        if type(volume) in (float, int):
+            self.volume = volume
+        if type(measure) == str:
+            self.measure = measure
 
     def __str__(self):
         return f'{self.name}: {self.volume}, {self.measure}'
